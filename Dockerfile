@@ -1,35 +1,40 @@
-# Use an official Python runtime as a parent image
-FROM python:3.9-slim
+FROM ubuntu:20.04
+USER root
+RUN apt update && apt install curl jq git gh
+CMD ["bash"]
 
-# Set the working directory to /app
-WORKDIR /app
+# # Use an official Python runtime as a parent image
+# FROM python:3.9-slim
 
-# Install necessary tools
-RUN apt-get update && \
-    apt-get install -y curl && \
-    rm -rf /var/lib/apt/lists/*
+# # Set the working directory to /app
+# WORKDIR /app
 
-# Download and install Google Cloud SDK
-RUN curl -O https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-362.0.0-linux-x86_64.tar.gz && \
-    tar zxvf google-cloud-sdk-362.0.0-linux-x86_64.tar.gz && \
-    ./google-cloud-sdk/install.sh
+# # Install necessary tools
+# RUN apt-get update && \
+#     apt-get install -y curl && \
+#     rm -rf /var/lib/apt/lists/*
 
-# Add the Google Cloud SDK binary directory to the PATH
-ENV PATH $PATH:/app/google-cloud-sdk/bin
+# # Download and install Google Cloud SDK
+# RUN curl -O https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-362.0.0-linux-x86_64.tar.gz && \
+#     tar zxvf google-cloud-sdk-362.0.0-linux-x86_64.tar.gz && \
+#     ./google-cloud-sdk/install.sh
 
-# Install AWS CLI
-RUN apt-get update && \
-    apt-get install -y awscli && \
-    rm -rf /var/lib/apt/lists/*
+# # Add the Google Cloud SDK binary directory to the PATH
+# ENV PATH $PATH:/app/google-cloud-sdk/bin
 
-# Verify installations
-RUN gcloud version
-RUN aws --version
+# # Install AWS CLI
+# RUN apt-get update && \
+#     apt-get install -y awscli && \
+#     rm -rf /var/lib/apt/lists/*
 
-# Set up a non-root user
-RUN useradd -ms /bin/bash dockeruser
-USER dockeruser
-WORKDIR /home/dockeruser
+# # Verify installations
+# RUN gcloud version
+# RUN aws --version
 
-# Default command
-CMD ["/bin/bash"]
+# # Set up a non-root user
+# RUN useradd -ms /bin/bash dockeruser
+# USER dockeruser
+# WORKDIR /home/dockeruser
+
+# # Default command
+# CMD ["/bin/bash"]
