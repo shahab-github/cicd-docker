@@ -1,6 +1,6 @@
 FROM ubuntu:20.04
 USER root
-RUN apt update && apt install curl jq git
+# RUN apt update && apt install curl jq git
 CMD ["bash"]
 
 # # Use an official Python runtime as a parent image
