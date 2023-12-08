@@ -11,9 +11,15 @@ jobs:
     - name: Run script
       env:
         SCRIPT_ARGS: "Hello world"
+        DRY_RUN: "true"
+        STALE: "3 months ago"
       run: |
         pwd
         ls
-        chmod +x .github/script/script.sh
-        .github/script/script.sh $SCRIPT_ARGS
+        echo $SCRIPT_ARGS
+        echo $DRY_RUN
+        echo $STALE
+
+        # chmod +x .github/script/script.sh
+        # .github/script/script.sh $SCRIPT_ARGS
 
