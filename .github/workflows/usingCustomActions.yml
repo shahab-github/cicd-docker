@@ -3,7 +3,7 @@ name: custome action
 on:
   push:
     branches:
-      - 'main'
+      - test*
 
 jobs:
   docker:
